@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#263b55">
+  <meta name="description" content="QQ音乐·听境：一句话配置听歌环境，真实作品与艺人资料围绕音乐出现。">
+  <title>QQ音乐·听境｜Music First</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body data-theme="blue">
+<svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.7"/><path d="m16 16 5 5"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 3.1 13.6 5l2.4-.3.9 2.3 2.3.9-.3 2.4 1.9 1.7-1.9 1.6.3 2.4-2.3.9-.9 2.3-2.4-.3-1.6 1.9-1.7-1.9-2.4.3-.9-2.3-2.3-.9.3-2.4L3.1 12 5 10.3l-.3-2.4L7 7l.9-2.3 2.4.3z"/><circle cx="12" cy="12" r="2.7"/></symbol>
+  <symbol id="i-diamond" viewBox="0 0 24 24"><path d="m12 2.8 9.2 9.2-9.2 9.2L2.8 12z"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2c0-3 2.4-5 6-5s6 2 6 5v2M17 5a3 3 0 0 1 0 6m2 3c1.8.6 2.5 2 2.5 4v2"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M4 5v14m16-14L7 12l13 7z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5 20 12 7 19.5z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5v14m10-14v14"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M20 5v14M4 5l13 7-13 7z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.5 8.2c0 4.1-4.5 7.7-8.5 11-4-3.3-8.5-6.9-8.5-11a4.8 4.8 0 0 1 8.5-3 4.8 4.8 0 0 1 8.5 3z"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M20 12H4m7-7-7 7 7 7"/></symbol>
+</svg>
+<div class="app-shell">
+  <header class="appbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"></span><strong>QQ音乐 <span>·</span> 听境</strong></div>
+    <label class="search-box"><svg class="ui-icon" aria-hidden="true"><use href="#i-search"/></svg><input id="search-input" type="search" placeholder="搜索当前曲目" aria-label="搜索当前曲目"></label>
+    <nav class="top-actions" aria-label="主要功能">
+      <button id="nav-spaces" type="button">我的听境</button>
+      <button id="nav-artist" type="button">艺人陪听</button>
+      <button id="open-settings" class="icon-button" type="button" aria-label="主题设置"><svg class="ui-icon" aria-hidden="true"><use href="#i-settings"/></svg></button>
+    </nav>
+  </header>
+
+  <main id="player-view" class="player-view">
+    <div class="stage-top">
+      <div class="clock-block"><time id="clock">10:44</time><span id="weather">你的音乐时刻</span></div>
+      <div class="space-toolbar">
+        <button id="current-space-chip" class="toolbar-pill active" type="button" aria-controls="companion-panel" aria-expanded="false"><svg class="ui-icon" aria-hidden="true"><use href="#i-diamond"/></svg><span id="current-space-label">NMIXX 听境</span><span class="pill-hint">详情</span></button>
+        <button id="artist-chip" class="toolbar-pill" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#i-music"/></svg><span id="artist-chip-label">艺人陪听</span></button>
+        <button id="friend-chip" class="toolbar-pill" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#i-users"/></svg>一起听</button>
+      </div>
+    </div>
+
+    <div class="quiet-status">
+      <span class="status-light" aria-hidden="true"></span><span id="context-line">熟悉歌曲优先 · 低探索 · 高能量</span>
+      <button id="adjust-trigger" type="button">调一下</button><button id="edit-space" type="button">编辑听境</button>
+    </div>
+
+    <section class="player-stage" aria-label="当前音乐">
+      <div class="now-playing">
+        <a id="cover-source" class="album-cover" href="https://nmixx.jype.com/discography/dru5zt6g" target="_blank" rel="noopener noreferrer" aria-label="查看官方作品页"><img id="album-image" alt="当前歌曲的官方专辑封面"><span class="cover-fallback" aria-hidden="true">听境</span></a>
+        <div class="song-details">
+          <span class="micro-label">NOW PLAYING · OFFICIAL RELEASE</span>
+          <h1 id="song-title">Heavy Serenade</h1>
+          <p id="song-artist">NMIXX · Heavy Serenade</p>
+          <p id="song-release" class="release-line">2026-05-11 · 官方作品</p>
+          <div id="song-note" class="song-note">官方版本资料会跟随歌曲切换。</div>
+          <div class="progress-wrap">
+            <input id="seek" type="range" min="0" max="100" value="0" aria-label="官方播放器进度" disabled>
+            <div class="time-label"><span id="elapsed">0:00</span><span id="duration">--:--</span></div>
+          </div>
+          <div class="transport">
+            <button id="prev-track" class="icon-button" type="button" aria-label="上一首"><svg class="ui-icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
+            <button id="play-pause" class="play-main" type="button" aria-label="播放官方视频"><svg class="ui-icon icon-play" aria-hidden="true"><use href="#i-play"/></svg><svg class="ui-icon icon-pause" aria-hidden="true"><use href="#i-pause"/></svg></button>
+            <button id="next-track" class="icon-button" type="button" aria-label="下一首"><svg class="ui-icon" aria-hidden="true"><use href="#i-next"/></svg></button>
+            <button id="favorite" class="icon-button heart-button" type="button" aria-label="收藏歌曲" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#i-heart"/></svg></button>
+          </div>
+          <div class="source-line">封面与作品资料来自 <a id="release-source-link" href="https://nmixx.jype.com/discography" target="_blank" rel="noopener noreferrer">JYP 官方</a>；播放使用 <a id="video-source-link" href="https://www.youtube.com/@NMIXXOfficial" target="_blank" rel="noopener noreferrer">官方视频</a>。</div>
+        </div>
+      </div>
+      <div id="player-video-home"><div id="official-player-wrap" class="official-player-wrap" hidden>
+        <div class="media-heading"><div><strong>官方播放器</strong><small>歌曲版权及播放由原平台提供，需联网</small></div><button id="close-video" type="button">收起视频</button></div>
+        <div id="yt-player" class="youtube-player"></div>
+        <div class="media-fallback"><span id="player-status">如视频没有自动开始，请点击播放器中的播放键。</span><a id="official-video-link" href="#" target="_blank" rel="noopener noreferrer">在官方频道观看 ↗</a></div>
+      </div></div>
+    </section>
+
+    <section class="queue-section" aria-label="待播列表">
+      <button id="queue-toggle" class="queue-toggle" type="button" aria-controls="queue-list" aria-expanded="false"><span>待播列表</span><span id="queue-count">7 首</span><svg class="ui-icon queue-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+      <div id="queue-list" class="queue-list" hidden></div>
+    </section>
+
+    <aside id="companion-panel" class="companion-panel" aria-label="听境详情" hidden>
+      <div class="panel-top"><div><span class="micro-label">LISTENING CONTEXT</span><h2 id="companion-title">现在在听</h2></div><button id="collapse-side" class="icon-button" type="button" aria-label="收起听境详情">×</button></div>
+      <div id="companion-body" class="companion-body"></div>
+    </aside>
+  </main>
+</div>
+
+<dialog id="create-view" class="sheet wide-sheet" aria-labelledby="create-title">
+  <div class="sheet-head"><div><span class="micro-label">CREATE / EDIT SPACE</span><h2 id="create-title">你现在想怎么听？</h2></div><button class="close-btn" data-close-view type="button" aria-label="关闭">×</button></div>
+  <p class="sheet-intro">说一句，或直接调参数。听境只给出配置，不打断你听歌。</p>
+  <div class="create-grid"><section class="form-card"><form id="intent-form"><label for="intent-input">描述此刻的听歌需求</label><textarea id="intent-input" rows="3" placeholder="我要写论文，熟悉歌曲多一点，不要太吵。"></textarea><button type="submit" class="solid-button">生成配置</button></form><div class="preset-row"><button data-prompt="我要写论文，熟悉歌曲多一点，不要太吵。">专注写作</button><button data-prompt="通勤回家，想听熟悉又有节奏的歌。">通勤</button><button data-prompt="现在要运动，想听节奏强一点的歌。">运动</button><button data-prompt="睡前想听安静的纯音乐，30分钟后停止。">睡前</button></div><div id="intent-tags" class="intent-tags"></div></section>
+  <section class="form-card config-card"><div class="card-top"><div><span class="micro-label">SPACE DNA</span><h3 id="draft-name">论文听境</h3></div><button id="rename-space" type="button">重命名</button></div><div class="config-sliders"><label>熟悉度 <output id="familiarity-value">80%</output><input id="familiarity-range" type="range" min="0" max="100" value="80"></label><label>探索度 <output id="exploration-value">20%</output><input id="exploration-range" type="range" min="0" max="100" value="20"></label><label>能量 <output id="energy-value">35%</output><input id="energy-range" type="range" min="0" max="100" value="35"></label><label>人声 <output id="vocal-value">20%</output><input id="vocal-range" type="range" min="0" max="100" value="20"></label></div><div class="config-chips"><div><span>推荐重点</span><div id="positive-tags"></div></div><div><span>减少出现</span><div id="negative-tags"></div></div></div><label class="timer-control">播放定时 <select id="timer-select"><option value="0">关闭</option><option value="15">15分钟</option><option value="30">30分钟</option><option value="60">60分钟</option><option value="120">120分钟</option></select></label><button id="start-space" class="solid-button full-width" type="button">保存并开始听</button></section></div>
+</dialog>
+
+<dialog id="spaces-view" class="sheet" aria-labelledby="spaces-title"><div class="sheet-head"><div><span class="micro-label">YOUR MUSIC SPACES</span><h2 id="spaces-title">我的听境</h2></div><button class="close-btn" data-close-view type="button" aria-label="关闭">×</button></div><p class="sheet-intro">好的听歌状态，可以保存、调整，再次进入。</p><div id="spaces-grid" class="spaces-grid"></div><button id="create-from-spaces" class="new-space-card" type="button">＋ 用一句话创建新听境</button></dialog>
+
+<dialog id="artist-view" class="sheet artist-sheet" aria-labelledby="artist-title">
+  <div class="sheet-head"><div><span class="micro-label">ARTIST LISTENING</span><h2 id="artist-title">选择陪听成员</h2></div><button class="close-btn" data-close-view type="button" aria-label="关闭">×</button></div>
+  <p class="sheet-intro">选择一位成员，或选择 NMIXX 组合陪听。视觉与音乐同步，成员本人并未实时参与。</p>
+  <div id="member-grid" class="member-grid" role="group" aria-label="选择 NMIXX 陪听成员"></div>
+  <a class="member-source" href="https://nmixx.jype.com/profile" target="_blank" rel="noopener noreferrer">查看 JYP 官方成员资料 ↗</a>
+  <div class="artist-actions"><button id="choose-artist" class="solid-button" type="button">进入陪听空间</button><button id="choose-none" type="button">只听音乐</button></div>
+  <div class="artist-song-head"><strong>从官方作品开始</strong><a href="https://nmixx.jype.com/discography" target="_blank" rel="noopener noreferrer">完整作品目录 ↗</a></div>
+  <div id="artist-tracks" class="artist-tracks"></div>
+  <p class="fine-print">歌曲与成员名单参照 JYP 官方资料；陪听照片由用户提供。成员邀请语、陪听时刻和推荐均为演示编排，不是艺人原话或本人推荐。</p>
+</dialog>
+
+<dialog id="artist-room" class="artist-room" aria-labelledby="room-title">
+  <div class="room-shell">
+    <header class="room-header">
+      <button id="room-back" class="room-icon-button" type="button" aria-label="返回主播放页"><svg class="ui-icon" aria-hidden="true"><use href="#i-back"/></svg></button>
+      <div class="room-heading"><span class="micro-label">ARTIST LISTENING ROOM</span><h2 id="room-title">HAEWON 陪你听</h2></div>
+      <div class="room-header-actions"><span id="room-space" class="room-space"></span><button id="room-switch" type="button">换成员</button><label class="room-density-label">陪听方式 <select id="room-density"><option value="quiet">安静</option><option value="normal">默认</option><option value="deep">深度</option></select></label></div>
+    </header>
+    <div class="room-main">
+      <section id="room-visual" class="room-visual" aria-label="陪听视觉空间">
+        <img id="room-portrait" src="./assets/haewon-user.jpg" alt="用户提供的 HAEWON 照片" hidden>
+        <div id="room-monogram" class="room-monogram" aria-hidden="true"></div>
+        <div class="room-visual-shade"></div><div class="room-breath" aria-hidden="true"></div>
+        <div class="room-visual-copy"><span id="room-scene-label">NMIXX · LISTENING WITH YOU</span><strong id="room-member">HAEWON</strong><span id="room-presence">同一首歌，同一段时间。</span><a id="member-bubble-link" class="room-bubble-link" href="#" aria-label="HAEWON 的泡泡，演示入口">HAEWON 的泡泡 ↗</a></div>
+      </section>
+      <section class="room-music" aria-label="当前播放">
+        <span class="micro-label">NOW PLAYING · OFFICIAL RELEASE</span>
+        <p id="room-mode-cue" class="room-mode-cue" aria-live="polite">默认陪听 · 音乐与轻量提示自然出现</p>
+        <div class="room-song-head"><img id="room-cover" src="./assets/nmixx-heavy.webp" alt=""><div><h3 id="room-song-title">Heavy Serenade</h3><p id="room-song-artist">NMIXX · Heavy Serenade</p></div></div>
+        <p id="room-song-note" class="room-song-note"></p>
+        <a id="room-source" class="room-source" href="https://nmixx.jype.com/discography" target="_blank" rel="noopener noreferrer">查看官方作品资料 ↗</a>
+        <div id="room-deep-detail" class="room-deep-detail" hidden><span class="micro-label">作品线索</span><p id="room-deep-text"></p></div>
+        <input id="room-seek" class="room-seek" type="range" min="0" max="100" value="0" aria-label="陪听空间播放进度" disabled>
+        <div class="room-times"><span id="room-elapsed">0:00</span><span id="room-duration">--:--</span></div>
+        <div class="room-controls"><button id="room-prev" class="room-icon-button" type="button" aria-label="上一首"><svg class="ui-icon" aria-hidden="true"><use href="#i-prev"/></svg></button><button id="room-play" class="play-main" type="button" aria-label="播放官方视频"><svg class="ui-icon icon-play" aria-hidden="true"><use href="#i-play"/></svg><svg class="ui-icon icon-pause" aria-hidden="true"><use href="#i-pause"/></svg></button><button id="room-next" class="room-icon-button" type="button" aria-label="下一首"><svg class="ui-icon" aria-hidden="true"><use href="#i-next"/></svg></button><button id="room-favorite" class="room-icon-button heart-button" type="button" aria-label="收藏歌曲" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#i-heart"/></svg></button></div>
+        <button id="room-tune" class="room-feeling" type="button">调一下</button>
+        <div id="room-video-slot"></div>
+      </section>
+    </div>
+    <div class="room-bottom"><div class="room-bottom-copy"><span class="micro-label">MUSIC MOMENT · 陪听片刻</span><p id="room-moment">按下播放，画面会跟随音乐轻轻变化。</p><span class="room-next-hint">接下来 · <strong id="room-recommend-title">Papillon</strong></span></div><div class="room-bottom-actions"><button id="room-calendar" type="button">陪听日历</button><button id="room-keep-queue" type="button">继续我的队列</button></div></div>
+    <footer class="room-footer"><span id="room-session">本次陪听 0:00</span><span>非官方概念演示 · 无真人实时参与</span></footer>
+  </div>
+</dialog>
+
+<dialog id="calendar-dialog" class="sheet small-sheet calendar-sheet" aria-labelledby="calendar-title"><div class="sheet-head"><div><span class="micro-label">LISTENING CALENDAR</span><h2 id="calendar-title">陪听日历</h2></div><button class="close-btn" data-close="calendar-dialog" type="button" aria-label="关闭">×</button></div><p id="calendar-intro" class="sheet-intro">只记录你在本机实际播放且打开陪听空间的时间。</p><div class="calendar-total"><strong id="calendar-total">0 秒</strong><span>近 28 天陪听时长</span></div><div id="calendar-grid" class="calendar-grid" role="list" aria-label="最近 28 天陪听记录"></div><div id="calendar-list" class="calendar-list"></div><button id="calendar-sample" class="calendar-sample" type="button">预览样例记录</button></dialog>
+
+<dialog id="adjust-dialog" class="sheet small-sheet" aria-labelledby="adjust-title">
+  <div class="sheet-head"><div><span class="micro-label">QUICK TUNE</span><h2 id="adjust-title">调一下</h2></div><button class="close-btn" data-close="adjust-dialog" type="button" aria-label="关闭">×</button></div>
+  <p class="sheet-intro">这一刻想听什么，随时告诉听境。</p>
+  <div class="quick-grid"><button data-adjust="familiar">熟悉一点</button><button data-adjust="quiet">安静一点</button><button data-adjust="energy">有劲一点</button><button data-adjust="instrumental">减少人声</button><button data-adjust="different">换种风格</button></div>
+  <form id="adjust-form" class="drawer-form"><label for="adjust-input">或者说一句</label><div><input id="adjust-input" placeholder="再安静一点"><button type="submit">应用</button></div></form>
+  <div class="tune-feedback"><button id="just-right" class="feedback-button emphasis" type="button">♡ 就这个感觉</button><details class="reason-disclosure"><summary>不对味？说说原因</summary><div class="quick-grid"><button data-reason="loud" type="button">太吵</button><button data-reason="slow" type="button">太慢</button><button data-reason="unfamiliar" type="button">太陌生</button><button data-reason="vocal" type="button">人声太多</button><button data-reason="style" type="button">风格不对</button><button data-reason="today" type="button">今天不想听</button></div></details></div>
+  <p class="drawer-note">默认只调整本次听境。<button id="save-session" type="button">保存到此空间</button></p>
+</dialog>
+<dialog id="friend-dialog" class="sheet small-sheet" aria-labelledby="friend-title"><div class="sheet-head"><div><span class="micro-label">LISTEN TOGETHER · DEMO</span><h2 id="friend-title">一起听</h2></div><button class="close-btn" data-close="friend-dialog" type="button" aria-label="关闭">×</button></div><p class="sheet-intro">好友共听仍为单机交互示意，尚无实时同步服务。</p><button id="copy-invite" class="solid-button full-width" type="button">复制邀请文案</button><div class="friend-actions"><button id="friend-add" type="button">朋友投一首</button><button id="friend-mix" type="button">生成 Friend Mix</button></div><p id="friend-state" class="drawer-note">当前：只有你在听。</p></dialog>
+<dialog id="settings-dialog" class="sheet small-sheet" aria-labelledby="settings-title"><div class="sheet-head"><div><span class="micro-label">APPEARANCE</span><h2 id="settings-title">主题设置</h2></div><button class="close-btn" data-close="settings-dialog" type="button" aria-label="关闭">×</button></div><p class="sheet-intro">保留工作蓝，也可换成经典绿或会员黑金。</p><div class="theme-list"><button data-theme-choice="blue" type="button"><i class="theme-dot blue"></i>工作蓝</button><button data-theme-choice="green" type="button"><i class="theme-dot green"></i>经典绿</button><button data-theme-choice="gold" type="button"><i class="theme-dot gold"></i>会员黑金</button></div><label class="color-choice">自定义强调色 <input id="custom-accent" type="color" value="#a9d4f3"></label></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
