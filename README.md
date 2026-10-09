@@ -4,7 +4,7 @@
 
 「听境」是 QQ 音乐工作场景的 AI 黑客松概念原型。平时只有一个简洁的主播放页；选择艺人或组合后，进入全屏陪听空间。创建、保存和主题设置通过侧边弹层完成。
 
-▶ [打开在线演示](https://music-multiverse-hackathon-2026.workspace-012770.chatgpt.site/)（当前仅项目所有者可访问） · [观看交互流程示意视频](dist/assets/tingjing-demo.mp4)
+▶ [打开公开网页](https://martinax0331yj.github.io/qq-music-tingjing-demo/)
 
 ![HAEWON 陪听空间的流程示意](dist/assets/room-preview.png)
 
